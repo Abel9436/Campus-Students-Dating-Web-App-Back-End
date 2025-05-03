@@ -18,10 +18,20 @@ class UserProfile(models.Model):
         ('O', 'Other'),
     ]
 
+    BATCH_CHOICES = [
+        (1, '1st'),
+        (2, '2nd'),
+        (3, '3rd'),
+        (4, '4th'),
+        (5, '5th'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     birth_date = models.DateField(null=True, blank=True)
+    interests = models.TextField(blank=True)  
+    batch_year = models.IntegerField(choices=BATCH_CHOICES, null=True, blank=True)
     location = models.CharField(max_length=100, blank=True)
     profile_image = models.ImageField(upload_to='profile_images/', blank=True)
     is_verified = models.BooleanField(default=False)
